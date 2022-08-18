@@ -1,0 +1,23 @@
+{
+  "name": "src-run-mover",
+  "version": "0.0.1",
+  "description": "A script that moves runs from one leaderbord to another on speedrun.com.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitchell-merry/src-run-mover.git"
+  },
+  "keywords": [
+    "speedrun.com",
+    "sr.c"
+  ],
+  "author": "Mitchell Merry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mitchell-merry/src-run-mover/issues"
+  },
+  "homepage": "https://github.com/mitchell-merry/src-run-mover#readme"
+}
