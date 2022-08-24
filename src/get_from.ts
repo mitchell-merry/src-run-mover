@@ -1,5 +1,7 @@
-import * as SRC from "src-ts"
-import * as data from "./data.json"
+import 'dotenv/config';
+import * as SRC from "src-ts";
+import * as data from "./data.json";
+import fs from 'fs';
 
 (async () => {
 
@@ -13,4 +15,8 @@ runs = SRC.filterRuns(runs, variables);
 
 console.log(`Found ${runs.length} runs in leaderboard...`);
 
+const ids = runs.map(run => run.id);
+
+fs.mkdirSync('./DATA', { recursive: true });
+fs.writeFileSync('./DATA/from_ids.json', JSON.stringify(ids, null, 2));
 })();
