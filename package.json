@@ -4,12 +4,14 @@
   "description": "A script that moves runs from one leaderbord to another on speedrun.com.",
   "main": "dist/index.js",
   "scripts": {
-	"clean": "rimraf ./dist",
+    "clean": "rimraf ./dist",
     "build": "npm run clean && tsc",
     "start:from": "node dist/get_from.js",
     "dev:from": "npm run build && npm run start:from",
-	"start:to": "node dist/send_to.js",
-	"dev:to": "npm run build && npm run start:to"
+    "start:to": "node dist/send_to.js",
+    "dev:to": "npm run build && npm run start:to",
+    "start:clear": "node dist/clear_board.js",
+    "dev:clear": "npm run build && npm run start:clear"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,10 @@
   "dependencies": {
     "@types/node": "^18.7.11",
     "dotenv": "^16.0.1",
-    "src-ts": "file:../src-ts/src-ts-1.3.0.tgz"
+    "prompt-sync": "^4.2.0",
+    "src-ts": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/prompt-sync": "^4.1.1"
   }
 }

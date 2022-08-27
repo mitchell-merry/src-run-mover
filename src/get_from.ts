@@ -19,4 +19,6 @@ const ids = runs.map(run => run.id);
 
 fs.mkdirSync('./DATA', { recursive: true });
 fs.writeFileSync('./DATA/from_ids.json', JSON.stringify(ids, null, 2));
+
+console.log('Verify found runs in DATA/from_ids.json before sending to leaderboard.');
 })();

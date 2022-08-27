@@ -1,30 +1,45 @@
 import 'dotenv/config';
-import * as SRC from "src-ts";
-import * as _data from "./data.json";
-import fs from 'fs';
-import { PostRun, SendGuest } from 'src-ts';
 import { assert } from 'console';
+import * as SRC from "src-ts";
 
-const ids = require('../DATA/from_ids.json');
+import { LeaderboardPartial } from './types/types';
 
-interface LeaderboardPartial {
-	game: string;
-	category: string;
-	level?: string;
-	variables: SRC.PostRun['variables'];
-}
+const ids = require('../DATA/from_ids.json') as string[];
+const data = require('./data.json')['to'] as LeaderboardPartial;
 
-assert(process.env['API-KEY']);
+assert(process.env['API-KEY'], 'api');
+assert(ids, 'ids');
+assert(data, 'data');
+
+const desc_suffix = 
+`
+
+===This run was automatically moved===
+Original submission date: %subdate%
+Original verifier: %verifier%
+Original verification date: %verdate%
+`;
 
 (async () => {
-
-const data = _data.to as LeaderboardPartial;
 
 await Promise.all(ids.map(async id => {
 	const run = await SRC.getRun(id) as Omit<SRC.Run, 'players'> & { players: SRC.RunPlayer[] };
 	if(SRC.isError(run)) throw new Error(run.message);
 
-	const postRun: PostRun = {
+	if(run.status.status !== 'verified')
+	{
+		console.log(`Skipping ${id} as it is not verified... (${run.status.status})`);
+		return;
+	}
+
+	const original_verifier = await SRC.getUser(run.status.examiner);
+	if(SRC.isError(original_verifier)) throw new Error(original_verifier.message);
+
+	const run_suffix = desc_suffix.replace('%subdate%', run.submitted?.replace('T', ' ').replace('Z', ' ') ?? 'unknown')
+	                              .replace('%verifier%', `${original_verifier.names.international} (${original_verifier.id})`)
+	                              .replace('%verdate%', run.status['verify-date']?.replace('T', ' ').replace('Z', ' ') ?? 'unknown');
+
+	const postRun: SRC.PostRun = {
 		category: data.category,
 		level: data.level ?? undefined,
 		date: run.date ?? undefined,
@@ -47,7 +62,7 @@ await Promise.all(ids.map(async id => {
 		}),
 		emulated: run.system.emulated,
 		video: run.videos?.links?.[0].uri ?? undefined,
-		comment: run.comment ?? '',
+		comment: (run.comment ?? '') + run_suffix,
 		splitsio: run.splits?.uri,
 		variables: data.variables
 	};
