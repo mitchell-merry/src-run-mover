@@ -1,17 +1,42 @@
 {
 	"from": {
-		"game": "3698ej8d",
-		"category": "jdrwlllk",
-		"variables": {}
+		"game": "o1y9jpo6",
+		"category": "jdz8ro3d",
+		"variables": {
+			"wl36rvyl": "mln5p7nl",
+			"dlo67y5l": "mlnxnkjq",
+			"kn049kdl": "gq7j42nq",
+			"ql6gwyx8": "013vm6rl"
+		}
 	},
 	"to": {
-		"game": "3698ej8d",
-		"category": "xk95qoy2",
-		"variables": {}
+		"game": "w6jmm26j",
+		"category": "wdmlxjek",
+		"variables": {
+			"789j1x6n": {
+				"type": "pre-defined",
+				"value": "21g4yrx1"
+			},
+			"0nwkp7kn": {
+				"type": "pre-defined",
+				"value": "p12w3ev1"
+			},
+			"gnxr2o6n": {
+				"type": "pre-defined",
+				"value": "013mj2rl"
+			},
+			"5lyxjk9n": {
+				"type": "pre-defined",
+				"value": "0q5r2yr1"
+			}
+		}
 	},
 	"clear": {
-		"game": "3698ej8d",
-		"category": "xk95qoy2",
-		"variables": {}
+		"game": "w6jmm26j",
+		"category": "wdmlxjek",
+		"variables": {
+			"789j1x6n": "21g4yrx1",
+			"0nwkp7kn": "p12w3ev1"
+		}
 	}
 }

@@ -2,7 +2,12 @@ import 'dotenv/config';
 import * as SRC from "src-ts";
 import * as data from "./data.json";
 import promptSync from 'prompt-sync';
+import { exit } from 'process';
+import { PutRunStatus } from 'src-ts';
 const prompt = promptSync();
+
+console.log(process.env['API-KEY'])
+if(!process.env['API-KEY']) exit(1);
 
 (async () => {
 
@@ -28,10 +33,16 @@ if(resp !== 'Y')
 	return;
 }
 
+const status: PutRunStatus['status'] = {
+	status: "rejected",
+	reason: "Your run has automatically moved to another category. Contact me if you have questions."
+}
+
 // destruction!!!!
 await Promise.all(ids.map(async id => {
-	const res = await SRC.deleteRun(id, process.env['API-KEY'] ?? '');
-	if(SRC.isError(res) && res.status !== 500) throw new Error(res.message);
+
+	const res = await SRC.setRunStatus(id, status, process.env['API-KEY'] ?? '');
+	if(SRC.isError(res) && res.status !== 500) throw new Error(JSON.stringify(res, null, 2));
 	console.log("Finished deleting " + id);
 }));
 

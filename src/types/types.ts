@@ -4,5 +4,5 @@ export interface LeaderboardPartial {
 	game: string;
 	category: string;
 	level?: string;
-	variables: SRC.PostRun['variables'];
+	variables: NonNullable<SRC.PostRun['variables']>;
 }
