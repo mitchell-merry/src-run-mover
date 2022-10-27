@@ -23,8 +23,8 @@ Original verification date: %verdate%
 
 (async () => {
 
-const game = await SRC.getGame<"categories.variables">(data.game, { embed: "categories.variables" });
-const fromgame = await SRC.getGame<"categories.variables">(fromdata.game, { embed: "categories.variables" });
+const game = await SRC.getGame(data.game, { embed: "categories.variables" });
+const fromgame = await SRC.getGame(fromdata.game, { embed: "categories.variables" });
 
 const fromVars = fromgame.categories.data.find(c => c.id === fromdata.category)!.variables.data;
 const toVars = game.categories.data.find(c => c.id === data.category)!.variables.data;
@@ -95,7 +95,7 @@ await Promise.all(ids.map(async id => {
 			} : {
 				rel: "user",
 				id: player.id
-			}) as SRC.SendPlayer;
+			}) as SRC.PlayerPartial;
 		})[0]],
 		emulated: run.system.emulated,
 		video: run.videos?.links?.[0].uri ?? undefined,

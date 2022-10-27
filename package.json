@@ -31,7 +31,7 @@
     "@types/node": "^18.7.11",
     "dotenv": "^16.0.1",
     "prompt-sync": "^4.2.0",
-    "src-ts": "file:../src-ts/src-ts-2.0.1.tgz"
+    "src-ts": "^2.6.1"
   },
   "devDependencies": {
     "@types/prompt-sync": "^4.1.1"
